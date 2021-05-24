@@ -9,13 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProgramController extends AbstractController
 {
         /**
-     * @Route("/programs/", name="program_index")
+     * @Route("/programs/show/{id}", methods={"GET"}, requirements={"id"="\d+"},  name="program_show")
      */
 
-    public function index(): Response
+  
+    public function show($id): Response
     {
         return $this->render('program/index.html.twig', [
-            'website' => 'Wild Séries',
+            'website' => $id ,
          ]);
     }
 }

@@ -3,6 +3,15 @@
 
     {% block body %}
    <h1>{{ website }}</h1>
+
+<h3>
+Test d'affichge du controleur programs: http://localhost:8000/programs/show/1
+
+<br>
+   <a href="programs/show/25658" target="_blank">Tester la route avec un integer (ça doit marcher)<a>
+   <br>
+<a href="programs/show/unautrechiffre" target = "_blank">Tester la route avec autre chose (ça doit faire une erreur)</a>
+</h3>
     {% endblock %}
 
 
