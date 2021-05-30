@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+  {% block title %}All programs{% endblock %}
+{% block body %}
+    <h1>Toutes les catégories disponibles : </h1>
+    {% for program in programs %}
+        <div>
+            <a href= "/categories/{{ program.name }}">{{ program.name }}</a>
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+
+    {% extends 'base.html.twig' %}
+
+  {% block title %}All programs{% endblock %}
+
+{% block body %}
+    <h1>3 dernières séries de la categorie </h1>
+    {% for program in programs|slice(programs|length-3 , programs|length)  %}
+        <div>
+            <h2>{{ program.id }} /    <a href= "/programs/show/{{ program.id }} "> {{ program.title }} </a>   </h2>
+            <p>{{ program.summary }}</p>
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+{% endblock %}
