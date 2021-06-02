@@ -42,11 +42,19 @@ class CategoryController extends AbstractController
             '404 : "Aucune catégorie nommée : '.$categoryName
         );
     }
+    
+//récupérer les données de la catégories
+$categoryId = $cat->getId();
+$categoryName = $cat->getName();
 
-    $categoryId = $cat->getId();
-    $program = $this->getDoctrine()
-    ->getRepository(Program::class)
-    ->findBy(['category' => $categoryId]);
+
+$program = $this->getDoctrine()->getRepository(Program::class)->findBy(['category' => $categoryId]);
+
+    
+
+    
+
+
     return $this->render('category/show.html.twig', [
         'programs' => $program,
     ]);

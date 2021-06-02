@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+  {% block title %}All programs{% endblock %}
+{% block body %}
+    <h1>Tous les épisodes disponibles pour cette saison : </h1>
+    {% for episode in episodes %}
+        <div>
+        {{ episode.title }}
+        </div>
+    {% else %}
+        Aucun épisode trouvée.
+    {% endfor %}
+{% endblock %}
