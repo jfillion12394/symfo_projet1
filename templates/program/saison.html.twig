@@ -1,0 +1,33 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Série #{{ program.id }}{% endblock %}
+
+{% block body %}
+
+<div class="media">
+  <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+  <div class="media-body">
+    <h1 class="mt-0">{{ program.title }}</h1>
+    <p>{{ program.summary }}</p>
+    <p>Catégorie : {{ program.category.name }}</p>
+
+    <p><b>LISTE DES SAISONS DE CETTE SERIE</b></p>
+
+        <div>
+
+          <p>
+          <a href="/episode/show/{{ saison.number }}">
+           saison: {{ saison.number }} année: {{ saison.year }}
+           </a>
+           </p>
+           
+        </div>
+
+
+
+  </div>
+</div>
+
+
+
+{% endblock %}

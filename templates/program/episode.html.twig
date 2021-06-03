@@ -4,7 +4,9 @@
     <h1>Tous les épisodes disponibles pour cette saison : </h1>
     {% for episode in episodes %}
         <div>
-        {{ episode.title }}
+        <ul>
+        <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.id }}">{{ episode.title }}</a></li>
+        </ul>
         </div>
     {% else %}
         Aucun épisode trouvée.
