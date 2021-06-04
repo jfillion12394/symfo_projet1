@@ -4,7 +4,8 @@
   {% block title %}All programs{% endblock %}
 
 {% block body %}
-    <h1>Les séries de la categorie sélectionnée </h1>
+    <h1>Les séries de la categorie sélectionnée       <a href= "/programs/new">Saisir une nouvelle série</a> </h1>
+
     {% for program in programs  %}
         <div>
             <h2>{{ program.id }} /    <a href= "/programs/show/{{ program.id }} "> {{ program.title }} </a>   </h2>
