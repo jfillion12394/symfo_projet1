@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
   {% block title %}All programs{% endblock %}
 {% block body %}
-    <h1>Tous les épisodes disponibles pour cette saison : </h1>
+
+<main>
+<section class = "container">
+
+    <h1>Tous les épisodes disponibles pour cette saison :  </h1>
+    <a href= "/episode/crud">Ajouter/Modifier/Supprimer un épisode => CRUD EPISODE</a>
+    <br>    <br>
+
     {% for episode in episodes %}
-        <div>
+        <div class = "display-6">
         <ul>
         <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.id }}">{{ episode.title }}</a></li>
         </ul>
@@ -11,4 +18,8 @@
     {% else %}
         Aucun épisode trouvée.
     {% endfor %}
+
+</section>
+</main>
+
 {% endblock %}

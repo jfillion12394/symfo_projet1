@@ -61,4 +61,29 @@ $SaisonID = $saison->getId();
     }
 
 
+           /**
+    * @Route("/programs/{ProgrammId}/seasons/{saisonId}", name="program_episode_showepi")
+    * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"ProgrammId": "id"}})
+    * @ParamConverter("saison", class="App\Entity\Saison", options={"mapping": {"saisonId": "id"}})
+    */
+
+
+    public function showepi(Program $program, Saison $saison): Response
+    {
+         //http://localhost:8000/programs/16/seasons/1
+
+         $myProgram = $program->getId(); // l'id de la série
+         $mySeason = $saison->getId(); // l'id de la saison
+
+         // recup les infos des épisode en fonctins de la série
+         $episode = $this->getDoctrine()
+         ->getRepository(Episode::class)
+         ->findBy(['Program' => $myProgram, 'saison' => $mySeason]);
+
+        return $this->render('program/episode.html.twig', [
+            'serie' => $myProgram,'saison' => $mySeason,'episodes' => $episode,
+        ]);
+    }
+
+
 }

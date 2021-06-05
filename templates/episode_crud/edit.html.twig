@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Episode{% endblock %}
+
+{% block body %}
+    <h1>Modifier un épisode</h1>
+
+  {{ form_start(form) }}
+
+
+    {{ include('episode_crud/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('episode_crud_index') }}">back to list</a>
+
+    {{ include('episode_crud/_delete_form.html.twig') }}
+
+      {{ form_end(form) }}
+{% endblock %}
+
+
+
+
+  

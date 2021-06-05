@@ -11,12 +11,14 @@
     <p>{{ program.summary }}</p>
     <p>Catégorie : {{ program.category.name }}</p>
 
-    <p><b>LISTE DES SAISONS DE CETTE SERIE</b></p>
+    <p><b>LISTE COMPLETE DES SAISONS DE CETTE SERIE</b>
+        <a href= "/saison">Ajouter/Modifier/Supprimer une saison</a></p>
+
     {% for saison in saisons %}
         <div>
 
           <p>
-          <a href="/episode/show/{{ saison.number }}">
+             <a href="/programs/{{program.id}}/seasons/{{ saison.number }}">
            saison: {{ saison.number }} année: {{ saison.year }}
            </a>
            </p>
@@ -29,7 +31,5 @@
 
   </div>
 </div>
-
-
 
 {% endblock %}

@@ -1,15 +1,21 @@
 {% extends 'base.html.twig' %}
   {% block title %}All programs{% endblock %}
 {% block body %}
-    <h1>Toutes les catégories disponibles : </h1>
+
+<main>
+<section class= "container">
+    <h1>Toutes les catégories disponibles --> Ajouter: <a href="/categories/new">( + )</a> </h1>
     {% for program in programs %}
-        <div>
-            <a href= "/categories/{{ program.name }}">{{ program.name }}</a>
+        <div class = "text-center display-6">
+    
+           <li> <a href= "/categories/{{ program.name }}">{{ program.name }}</a> </li>
+      
         </div>
     {% else %}
         Aucune série trouvée.
     {% endfor %}
 
-    <br><a href="/categories/new">Ajouter un nouvelle catégorie</a>
-
+  
+</section>
+</main>
 {% endblock %}
