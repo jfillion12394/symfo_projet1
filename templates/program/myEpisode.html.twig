@@ -11,5 +11,12 @@
 
             Synopsis: {{ episode.synopsis }}
         </div>
-
+<strong>Acteurs :</strong>
+<ul>
+    {% for actor in program.actors %}
+        <li>{{ actor.name }} </li>
+    {% else %}
+        <li>Aucun acteur pour cette série</li>
+    {% endfor %}
+</ul>
 {% endblock %}
