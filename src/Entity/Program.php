@@ -127,10 +127,12 @@ class Program
 
     public function setCategory(?Category $category): self
     {
+
         $this->category = $category;
 
         return $this;
     }
+
 
     /**
      * @return Collection|Saison[]
