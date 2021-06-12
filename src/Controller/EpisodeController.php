@@ -64,12 +64,13 @@ $SaisonID = $saison->getId();
            /**
     * @Route("/programs/{ProgrammId}/seasons/{saisonId}", name="program_episode_showepi")
     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"ProgrammId": "id"}})
-    * @ParamConverter("saison", class="App\Entity\Saison", options={"mapping": {"saisonId": "id"}})
+    * @ParamConverter("saison", class="App\Entity\Saison", options={"mapping": {"saisonId": "number"}})
     */
 
 
     public function showepi(Program $program, Saison $saison): Response
     {
+       
          //http://localhost:8000/programs/16/seasons/1
 
          $myProgram = $program->getId(); // l'id de la série
