@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Slugify;
 
 /**
  * @Route("/episode/crud")
@@ -28,7 +29,7 @@ class EpisodeCrudController extends AbstractController
     /**
      * @Route("/new", name="episode_crud_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,Slugify $slugify): Response
     {
         $episode = new Episode();
         $form = $this->createForm(EpisodeType::class, $episode);
@@ -36,6 +37,11 @@ class EpisodeCrudController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+               // saisir le titre slugué en base de données à la création de l'épisode
+               $slug = $slugify->generate($episode->getTitle());
+               $episode->setSlug($slug);
+
             $entityManager->persist($episode);
             $entityManager->flush();
 
@@ -61,12 +67,15 @@ class EpisodeCrudController extends AbstractController
     /**
      * @Route("/{id}/edit", name="episode_crud_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Episode $episode): Response
+    public function edit(Request $request, Episode $episode,Slugify $slugify): Response
     {
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+                 // saisir le titre slugué en base de données à la création de l'épisode
+                 $slug = $slugify->generate($episode->getTitle());
+                 $episode->setSlug($slug);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('episode_crud_index');

@@ -54,6 +54,7 @@ $SaisonID = $saison->getId();
 
     public function showEpisode(Program $program, Saison $saison, Episode $episode): Response
     {
+    
          //http://localhost:8000/programs/16/seasons/1/episode/3
         return $this->render('program/myEpisode.html.twig', [
             'program' => $program,'saison' => $saison,'episode' => $episode,

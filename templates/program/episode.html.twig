@@ -12,7 +12,7 @@
     {% for episode in episodes %}
         <div class = "display-6">
         <ul>
-        <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.id }}">{{ episode.title }}</a></li>
+        <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.slug }}">{{ episode.title }}</a></li>
         </ul>
         </div>
     {% else %}
