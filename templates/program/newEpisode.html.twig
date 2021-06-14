@@ -1,0 +1,17 @@
+ {% extends 'BaseEmail.html.twig' %}
+
+{% block body %}
+
+<body>
+    <h1>Tu viens de créer un nouvel épisode: </h1>
+    <p>Titre de l'épisode : {{ episode.title }}.</p>
+    dans la série: {{ episode.program.title }}
+    <p>Résumé de la série : {{episode.synopsis }}
+
+
+<br>
+     <a href= "http://localhost:8000/programs/{{ episode.program.id }}/seasons/{{ episode.saison.id }}/episode/{{ episode.slug }}">lien vers l'épisode {{ episode.title }}</a>
+
+</body
+
+{% endblock %}

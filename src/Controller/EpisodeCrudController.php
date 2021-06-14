@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\Slugify;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 /**
  * @Route("/episode/crud")
@@ -29,7 +31,7 @@ class EpisodeCrudController extends AbstractController
     /**
      * @Route("/new", name="episode_crud_new", methods={"GET","POST"})
      */
-    public function new(Request $request,Slugify $slugify): Response
+    public function new(Request $request,Slugify $slugify,MailerInterface $mailer): Response
     {
         $episode = new Episode();
         $form = $this->createForm(EpisodeType::class, $episode);
@@ -44,6 +46,16 @@ class EpisodeCrudController extends AbstractController
 
             $entityManager->persist($episode);
             $entityManager->flush();
+
+            //var_dump($episode);
+     
+
+            $email = (new Email())
+            ->from('jfillion12394@gmail.com')
+            ->to( $this->getParameter('mailer_to'))
+            ->subject('New episode coming up: ' . $episode->getTitle())
+            ->html($this->renderView('program/newEpisode.html.twig', ['episode' => $episode]));
+            $mailer->send($email);
 
             return $this->redirectToRoute('episode_crud_index');
         }

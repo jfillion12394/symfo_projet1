@@ -9,8 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProgramType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use App\Service\Slugify;
 
+
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+use App\Service\Slugify;
 use App\Entity\Program;
 use App\Entity\Saison;
 use App\Entity\Episode;
@@ -23,8 +27,10 @@ class ProgramController extends AbstractController
      *
      * @Route("/programs/new", name="new_prog")
      */
-    public function new(Request $request, Slugify $slugify) : Response
+    public function new(Request $request, Slugify $slugify,MailerInterface $mailer) : Response
     {
+
+        
         // Create a new Program Object
         $program = new Program();
 
@@ -48,11 +54,17 @@ class ProgramController extends AbstractController
             // Persist Category Object
             $entityManager->persist($program);
 
-       
-
-
             // Flush the persisted object
             $entityManager->flush();
+
+            $email = (new Email())
+            ->from('jfillion12394@gmail.com')
+            ->to( $this->getParameter('mailer_to'))
+            ->subject('Ta nouvelle série: ' . $program->getTitle())
+            ->html($this->renderView('program/newProgramEmail.html.twig', ['program' => $program]));
+            $mailer->send($email);
+          
+
             // Finally redirect to categories list
             return $this->redirectToRoute('category_index');
         }
@@ -61,9 +73,6 @@ class ProgramController extends AbstractController
             "form" => $form->createView(),
         ]);
     }
-
-
-
 
         /**
      * @Route("/programs/show/{url}", methods={"GET"},  name="program_show")
