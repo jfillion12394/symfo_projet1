@@ -18,6 +18,7 @@ use App\Service\Slugify;
 use App\Entity\Program;
 use App\Entity\Saison;
 use App\Entity\Episode;
+use App\Entity\Comment;
 
 class ProgramController extends AbstractController
 {
@@ -116,10 +117,16 @@ class ProgramController extends AbstractController
 
     public function showEpisode(Program $program, Saison $saison, Episode $episode): Response
     {
-    
+
+        $comment  = $this->getDoctrine()
+        ->getRepository(Comment::class)
+        ->findBy(['episode' => $episode->getId()],['id' => 'ASC']);
+
+        
+
          //http://localhost:8000/programs/16/seasons/1/episode/3
         return $this->render('program/myEpisode.html.twig', [
-            'program' => $program,'saison' => $saison,'episode' => $episode,
+            'program' => $program,'saison' => $saison,'episode' => $episode,'commentaires' => $comment,
         ]);
     }
 }

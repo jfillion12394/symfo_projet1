@@ -30,4 +30,17 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-# config/packages/mailer.yaml
+
+    # config/packages/security.yaml
+security:
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+            lazy: true
+            logout:
+                path: 'logout'
+                # where to redirect after logout
+                target: exit

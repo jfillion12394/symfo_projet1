@@ -49,9 +49,15 @@ class Episode
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="episode")
+     */
+    private $episode;
+
     public function __construct()
     {
         $this->season_id = new ArrayCollection();
+        $this->episode = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +151,36 @@ class Episode
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getEpisode(): Collection
+    {
+        return $this->episode;
+    }
+
+    public function addEpisode(Comment $episode): self
+    {
+        if (!$this->episode->contains($episode)) {
+            $this->episode[] = $episode;
+            $episode->setEpisode($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEpisode(Comment $episode): self
+    {
+        if ($this->episode->removeElement($episode)) {
+            // set the owning side to null (unless already changed)
+            if ($episode->getEpisode() === $this) {
+                $episode->setEpisode(null);
+            }
+        }
 
         return $this;
     }

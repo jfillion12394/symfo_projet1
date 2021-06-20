@@ -9,13 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DefaultController extends AbstractController
 {
         /**
-     * @Route("/")
+     * @Route("/", name="default")
      */
 
     public function index(): Response
     {
-
-     
 
         $programs = $this->getDoctrine()
         ->getRepository(Program::class)
@@ -25,4 +23,17 @@ class DefaultController extends AbstractController
             'programs' => $programs,
          ]);
     }
+
+
+   /**
+     * @Route("/exit", name="exit")
+     */
+
+    public function logout(): Response
+    {
+        return $this->render('logout.html.twig');
+    }
+
+
+
 }

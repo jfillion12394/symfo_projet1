@@ -9,10 +9,26 @@
     <a href= "/episode/crud">Ajouter/Modifier/Supprimer un épisode => CRUD EPISODE</a>
     <br>    <br>
 
+  
+
     {% for episode in episodes %}
+
+
+
+
+
         <div class = "display-6">
         <ul>
-        <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.slug }}">{{ episode.title }}</a></li>
+        <li> <a href= "/programs/{{ serie }}/seasons/{{ saison }}/episode/{{ episode.slug }}">{{ episode.title }}</a> --> 
+        
+
+{% if app.user %}
+         <a href ="http://127.0.0.1:8000/comment/new/{{ episode.id }}">Leave a comment</a>
+{% endif %}
+
+
+        </li>
+
         </ul>
         </div>
     {% else %}
